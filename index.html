@@ -353,9 +353,7 @@ body.deep #skip{right:calc(60px + env(safe-area-inset-right,0px))}
 <path id="foot" d="M89,606L92,628Q94,646 114,646H326Q346,646 348,628L351,606Z" fill="#C98D49" opacity="0"/>
 <g id="surf"><ellipse id="se" cx="220" cy="0" rx="0" ry="0" fill="#EFD6A8"/><ellipse id="si" cx="228" cy="0" rx="0" ry="0" fill="#CFA06A" opacity=".55"/></g>
 <g id="ribs" stroke="#1B1210" stroke-width="4" opacity=".4" stroke-linecap="round"></g>
-<path d="M2,50L24,282L46,296L92,628Q94,646 114,646H326Q346,646 348,628L394,296L416,282L438,50" fill="none" stroke="#1B1210" stroke-width="8" stroke-linejoin="round"/>
 <path id="base" d="M98,612Q220,626 342,612" fill="none" stroke="#1B1210" stroke-width="4" opacity=".55"/>
-<ellipse cx="220" cy="50" rx="217" ry="44" fill="none" stroke="#1B1210" stroke-width="8"/>
 <path id="lip" d="M3,50A217,44 0 1 0 437,50A217,44 0 1 0 3,50" fill="none" stroke="#E6C28A" stroke-width="0" stroke-linecap="round"/>
 <g fill="none" stroke="#DDB06F" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
 <path class="dp" pathLength="1" d="M2,50L24,282L46,296L92,628Q94,646 114,646H222"/>
@@ -363,6 +361,9 @@ body.deep #skip{right:calc(60px + env(safe-area-inset-right,0px))}
 <path class="dp" pathLength="1" d="M168,96C166,200 176,330 170,500"/>
 <path class="dp" pathLength="1" d="M292,96C294,210 284,300 290,400"/>
 </g>
+<!-- the glass outline stays on top of the tea, even when it overflows -->
+<path d="M2,50L24,282L46,296L92,628Q94,646 114,646H326Q346,646 348,628L394,296L416,282L438,50" fill="none" stroke="#1B1210" stroke-width="8" stroke-linejoin="round"/>
+<ellipse cx="220" cy="50" rx="217" ry="44" fill="none" stroke="#1B1210" stroke-width="8"/>
 </g>
 <g class="steam" id="steam" opacity="0" transform="translate(0,38.7)"><path d="M622,205c-10,-14 10,-22 0,-38c-8,-12 8,-20 0,-34"/><path d="M640,207c-10,-14 10,-22 0,-36"/><path d="M655,205c-10,-14 10,-24 0,-40c-8,-12 8,-22 0,-36"/><path d="M670,207c-10,-14 10,-22 0,-36"/><path d="M688,205c-10,-14 10,-22 0,-38c-8,-12 8,-20 0,-34"/><path d="M632,209c-8,-10 8,-16 0,-28"/><path d="M663,209c-8,-10 8,-16 0,-28"/><path d="M698,209c-8,-10 8,-16 0,-28"/></g>
 <ellipse id="rip" rx="0" ry="0" fill="none" stroke="#fff" stroke-width="2.5" opacity="0"/>
