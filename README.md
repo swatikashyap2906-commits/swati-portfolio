@@ -1,6 +1,11 @@
 # Swati Kashyap — Portfolio
 
-A single-page, self-contained portfolio (`index.html`). No build step, no dependencies.
+A single-page interactive portfolio. No build step, no dependencies.
+
+- `index.html`: all markup, styles and interactions (scenes 1–7 run top to bottom).
+- `assets/`: images, videos and the Sanskriti photobook pages, referenced from `index.html`.
+
+To swap a project in the work grid, edit the `projects` list in `index.html` (search for `EDIT HERE`) and drop the new cover into `assets/`.
 
 ## Deploy on Vercel (free)
 
