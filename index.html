@@ -303,6 +303,7 @@ body.atwork #skip{display:none}
 /* ===== slide 3: white mosquito + Meet me, bottom-left ===== */
 #mm{--mh:clamp(120px,min(34vh,calc((100vw - var(--fw,100vw))/2*.86)),320px);position:fixed;left:calc(clamp(12px,2vw,34px) + env(safe-area-inset-left,0px));bottom:calc(clamp(12px,3vh,34px) + env(safe-area-inset-bottom,0px));z-index:3;display:flex;flex-direction:column;align-items:center;opacity:0;transform:translateY(24px);transition:opacity .6s .8s,transform .9s .8s cubic-bezier(.2,.9,.3,1.15)}
 #s3.in #mm{opacity:1;transform:none}
+@media (min-aspect-ratio:1/1){#mm{left:auto;right:calc((100vw + var(--fw))/2 - var(--fw)*.045 + 10px);bottom:calc((100vh - var(--fh))/2 + var(--fh)*.13)}}
 #s3 #mm #next3{position:relative;z-index:1;font:700 clamp(15px,1.3vw,20px)/1 var(--label);letter-spacing:.2em;text-transform:uppercase;padding:8px 2px 6px;margin-right:-.2em;border:0;border-bottom:2px solid transparent;border-radius:0;background:none;color:#efe4c5;box-shadow:none;transition:color .2s,border-color .2s}
 #s3 #mm #next3:hover{color:#fff;border-color:currentColor;background:none;transform:none}
 #mm .mma{display:block;width:calc(var(--mh)*.456);height:calc(var(--mh)*.36);margin:2px 0 4px;overflow:visible}
@@ -349,15 +350,16 @@ body.deep #skip{right:calc(60px + env(safe-area-inset-right,0px))}
 <g id="gg">
 <path d="M2,50L24,282L46,296L92,628Q94,646 114,646H326Q346,646 348,628L394,296L416,282L438,50Z" fill="#fff" fill-opacity=".2"/>
 <path id="body" d="" fill="url(#lg)"/>
+<path id="foot" d="M89,606L92,628Q94,646 114,646H326Q346,646 348,628L351,606Z" fill="#C98D49" opacity="0"/>
 <g id="surf"><ellipse id="se" cx="220" cy="0" rx="0" ry="0" fill="#EFD6A8"/><ellipse id="si" cx="228" cy="0" rx="0" ry="0" fill="#CFA06A" opacity=".55"/></g>
 <g id="ribs" stroke="#1B1210" stroke-width="4" opacity=".4" stroke-linecap="round"></g>
 <path d="M2,50L24,282L46,296L92,628Q94,646 114,646H326Q346,646 348,628L394,296L416,282L438,50" fill="none" stroke="#1B1210" stroke-width="8" stroke-linejoin="round"/>
-<path d="M98,612Q220,626 342,612" fill="none" stroke="#1B1210" stroke-width="4" opacity=".55"/>
+<path id="base" d="M98,612Q220,626 342,612" fill="none" stroke="#1B1210" stroke-width="4" opacity=".55"/>
 <ellipse cx="220" cy="50" rx="217" ry="44" fill="none" stroke="#1B1210" stroke-width="8"/>
-<path id="lip" d="M8,58A212,42 0 0 0 432,58" fill="none" stroke="#E6C28A" stroke-width="0" stroke-linecap="round"/>
+<path id="lip" d="M3,50A217,44 0 1 0 437,50A217,44 0 1 0 3,50" fill="none" stroke="#E6C28A" stroke-width="0" stroke-linecap="round"/>
 <g fill="none" stroke="#DDB06F" stroke-width="15" stroke-linecap="round" stroke-linejoin="round">
-<path class="dp" pathLength="1" d="M2,60L20,282L40,300L86,624"/>
-<path class="dp" pathLength="1" d="M438,60L420,282L400,300L354,624"/>
+<path class="dp" pathLength="1" d="M2,50L24,282L46,296L92,628Q94,646 114,646H222"/>
+<path class="dp" pathLength="1" d="M438,50L416,282L394,296L348,628Q346,646 326,646H218"/>
 <path class="dp" pathLength="1" d="M168,96C166,200 176,330 170,500"/>
 <path class="dp" pathLength="1" d="M292,96C294,210 284,300 290,400"/>
 </g>
@@ -464,7 +466,7 @@ body.deep #skip{right:calc(60px + env(safe-area-inset-right,0px))}
 (function(){
 var $=function(i){return document.getElementById(i)};
 var svg=$('stage'),K=$('kettle'),KR=$('kr'),gg=$('gg'),body=$('body'),se=$('se'),si=$('si'),lip=$('lip'),stream=$('stream'),st2=$('stream2'),rip=$('rip'),pud=$('puddle'),steam=$('steam'),hint=$('hint'),s2=$('s2');
-var dps=document.querySelectorAll('.dp');
+var dps=document.querySelectorAll('.dp'),ribs=$('ribs'),base=$('base'),foot=$('foot');
 // ribs + flowers
 var h='',i;for(i=1;i<6;i++)h+='<line x1="'+(46+348*i/6)+'" y1="298" x2="'+(96+248*i/6)+'" y2="606"/>';$('ribs').innerHTML=h;
 h='';[[-72,-36,0,36,72,-24],[-90,-45,0,45,90,74]].forEach(function(r){for(var j=0;j<5;j++){var x=r[j];h+='<use href="#fw" x="'+x+'" y="'+(r[5]+7*(1-Math.pow(x/125,2)))+'"/>'}});$('fl').innerHTML=h;
@@ -487,7 +489,7 @@ var d=Math.hypot(px-TGX,py-TGY),w=cl(1-(d-60)/200);w=w*w*(3-2*w);
 var f=Math.min(1,dt*9);kx+=(px+(TGX-px)*w-kx)*f;ky+=(py+(TGY-py)*w-ky)*f;
 var tt=done?0:(w>.3?34*cl((w-.3)/.5):(drag?6:0));tilt+=(tt-tilt)*Math.min(1,dt*7);
 var pouring=!done&&tilt>22;
-if(pouring){if(fill<1)fill=Math.min(1,fill+dt*.3);else ov=Math.min(1,ov+dt*.65)}
+if(pouring){if(fill<1)fill=Math.min(1,fill+dt*.42);else ov=Math.min(1,ov+dt*.9)}
 K.setAttribute('transform','translate('+kx+','+ky+') scale('+KS+')');KR.setAttribute('transform','rotate('+tilt+')');
 // liquid: takes the glass's own outline
 var L=608-fill*558;
@@ -496,7 +498,8 @@ if(fill>.002){var a=hw(L),ry=a*.205,wob=1+.07*Math.sin(now/170)*(pouring?1:.3);
  se.setAttribute('cx',220);se.setAttribute('cy',L-ov*10);se.setAttribute('rx',a+ov*5);se.setAttribute('ry',ry*wob+ov*11);
  si.setAttribute('cy',L-ov*10+ry*.1);si.setAttribute('rx',(a+ov*5)*.78);si.setAttribute('ry',(ry*wob+ov*11)*.6)}
 else{body.setAttribute('d','');se.setAttribute('rx',0);si.setAttribute('rx',0)}
-lip.setAttribute('stroke-width',ov*16);
+lip.setAttribute('stroke-width',Math.min(16,ov*40));
+ribs.setAttribute('opacity',.4*(1-ov*.85));base.setAttribute('opacity',.55*(1-ov));foot.setAttribute('opacity',cl((ov-.55)/.35));
 dps.forEach(function(p,j){var q=cl(ov*1.25-j*.08);p.style.visibility=q>.002?'visible':'hidden';p.setAttribute('stroke-dasharray',q+' 1.01')});
 // stream
 if(pouring){var r=tilt*Math.PI/180,sx=kx+Math.cos(r)*TIPX-Math.sin(r)*TIPY,sy=ky+Math.sin(r)*TIPX+Math.cos(r)*TIPY;
