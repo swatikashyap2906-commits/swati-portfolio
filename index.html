@@ -11,6 +11,9 @@
 <meta property="og:description" content="Pour a cup of chai, strike a match, and see the work.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2300B7A8'/%3E%3Cpath d='M16 14h32l-3 12-2 2 -3 24H24l-3-24-2-2z' fill='%23E6C28A' stroke='%231B1210' stroke-width='3' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preload" as="image" href="assets/matchbox-texture.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..800;1,9..144,400..600&family=IBM+Plex+Sans:wght@400;500&family=Josefin+Sans:wght@600;700&display=swap">
 <style>
 :root{color-scheme:light;--bg:#00B7A8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html,body{height:100%;margin:0;background:var(--bg);font-family:Georgia,serif;overflow:hidden}
@@ -162,7 +165,6 @@ a.card:focus-visible{outline:3px solid #ffd21f;outline-offset:6px}
 .hint2{position:absolute;left:0;right:0;bottom:calc(26px + env(safe-area-inset-bottom,0px));text-align:center;pointer-events:none;transition:opacity .5s}
 .hint2 span{display:inline-block;padding:8px 18px;border-radius:20px;background:rgba(20,10,0,.78);color:#fff6dc;font:15px Georgia,serif;letter-spacing:.14em;text-transform:uppercase}
 #s4{z-index:40;background:#fff}
-#s4 img{width:100%;height:100%;object-fit:contain;display:block}
 #s4.show img{animation:develop 1.6s cubic-bezier(.2,.7,.3,1) both}
 @keyframes develop{0%{filter:blur(10px) brightness(1.7) saturate(.4);transform:scale(1.04)}60%{filter:blur(2px) brightness(1.15) saturate(.9)}100%{filter:none;transform:none}}
 #s5{z-index:41;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
@@ -215,7 +217,6 @@ a.card:focus-visible{outline:3px solid #ffd21f;outline-offset:6px}
 @media (max-width:700px){#pbi{max-width:100vw}#pb .nv{top:auto;bottom:14px;margin:0}#pbp{left:14px}#pbn{right:14px}}
 
 /* ===== mobile / portrait ===== */
-.m4{display:none}
 #next3,#to7{white-space:nowrap}
 @media (max-aspect-ratio:1/1){
  /* slide 3 : orange phone-screen look, header = Meet me only */
@@ -228,11 +229,6 @@ a.card:focus-visible{outline:3px solid #ffd21f;outline-offset:6px}
  /* slide 1 */
  #hint{font-size:12px;padding:0 18px;line-height:1.5}
  /* slide 4 : text + photo stacked */
- #s4 .full4{display:none}
- #s4 .m4{display:flex;position:absolute;inset:0;flex-direction:column;align-items:center;justify-content:center;gap:4vh;padding:6vh 7vw 12vh}
- #s4 .m4 img{width:auto;height:auto;object-fit:initial;max-width:100%}
- #s4 .m4t{width:min(86vw,420px)}
- #s4 .m4c{height:min(44vh,100vw*.75);max-width:80vw}
  /* slide 5 */
  #mq{height:min(52vh,92vw)}
  /* slide 6 */
@@ -261,7 +257,46 @@ button:focus-visible,a:focus-visible{outline:2px solid #ffd21f;outline-offset:3p
 #hint,.hint2 span,#s2hint span{text-wrap:balance}
 /* email breaks at sensible points instead of mid-letter */
 .ci a.row{word-break:normal;overflow-wrap:anywhere}
-@media (max-aspect-ratio:1/1){#s4 .m4{padding:calc(2vh + 52px) 7vw calc(10vh + 20px);gap:3vh;justify-content:space-between}#s4 .m4 img.m4t{width:min(84vw,400px);height:auto;flex:none}#s4 .m4 img.m4c{height:auto;width:auto;max-width:82vw;max-height:100%;min-height:0;flex:1 1 0;object-fit:contain}}
+/* ===== type system: Fraunces for display, Josefin Sans for labels, IBM Plex Sans for reading ===== */
+:root{--display:'Fraunces',Georgia,serif;--label:'Josefin Sans',system-ui,sans-serif;--body:'IBM Plex Sans',system-ui,sans-serif}
+#hint,#s2hint span,.hint2 span,#next3,#to7,.s3h,.vmh,.w6h,.ci .role,#pbc{font-family:var(--label);font-weight:600}
+#s2hint span,.hint2 span,#next3,#to7{padding-top:calc(.5em + 2px);padding-bottom:calc(.5em - 1px)}
+.ci h1{font-family:var(--display);font-weight:700;letter-spacing:-.02em}
+#load h2{font-family:var(--display);font-weight:700}
+.inner,.ttl,.foot{font-family:var(--display)}
+.cover .num{font-family:var(--display);font-weight:800}
+#load p,.vmc figcaption,.wc .tg,.w6f span{font-family:var(--display);font-style:italic;letter-spacing:.02em}
+.w6f span{font-style:normal}
+.ci a.row{font-family:var(--body);font-size:clamp(15px,1.6vw,22px)}
+
+/* ===== slide 4 intro, now live text instead of a picture of text ===== */
+#s4 .intro{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:clamp(32px,6vw,110px);padding:clamp(56px,8vh,90px) clamp(24px,7vw,120px) clamp(84px,13vh,130px);box-sizing:border-box}
+#s4 .itx{max-width:700px;flex:0 1 700px}
+#s4 .ih{margin:0;text-wrap:balance;font:700 clamp(18px,1.75vw,29px)/1.5 var(--label);letter-spacing:.15em;text-transform:uppercase;color:#111}
+#s4 .ih em{font-style:normal;color:#9e1b1b}
+#s4 .ih .dot{display:inline-block;width:.85em;height:.85em;margin-left:.55em;border-radius:50%;background:#9e1b1b;vertical-align:-.08em}
+#s4 .ip{margin:1.5em 0 0;font:400 clamp(15px,1.3vw,21px)/1.65 var(--body);letter-spacing:.07em;color:#1d1d1d;max-width:31em}
+#s4 .ipt{display:block;height:min(70vh,660px);width:auto;max-width:44vw;object-fit:contain;flex:none}
+#s4.show .ipt{animation:develop 1.6s cubic-bezier(.2,.7,.3,1) both}
+#s4.show .itx{animation:rise4 .9s .25s cubic-bezier(.2,.8,.3,1) both}
+@keyframes rise4{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (max-aspect-ratio:1/1){
+ #s4 .intro{flex-direction:column;justify-content:space-between;gap:3vh;padding:calc(2vh + 56px) 7vw calc(10vh + 22px)}
+ #s4 .itx{flex:none;max-width:420px}
+ #s4 .ih{font-size:clamp(14px,4.2vw,19px)}
+ #s4 .ip{font-size:clamp(13.5px,3.7vw,16px);margin-top:1.2em}
+ #s4 .ipt{height:auto;max-width:82vw;max-height:100%;min-height:0;flex:1 1 0}
+}
+
+/* ===== way-finding: skip the intro, and get back from contact ===== */
+#skip{position:fixed;left:calc(14px + env(safe-area-inset-left,0px));top:calc(12px + env(safe-area-inset-top,0px));z-index:61;background:none;border:0;padding:10px 4px;color:#fff;font:600 13px/1 var(--label);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;opacity:.78;transition:opacity .2s}
+#skip span{display:inline-block;transition:transform .2s}
+#skip:hover{opacity:1}#skip:hover span{transform:translateX(3px)}
+body.atwork #skip{display:none}
+.ci .back{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:clamp(22px,4vh,40px)}
+.ci .back button{background:none;border:0;padding:4px 0;color:#1a4fb4;font:600 13px/1 var(--label);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border-bottom:1.5px solid transparent;transition:border-color .2s}
+.ci .back button:hover{border-color:currentColor}
+
 @media (prefers-reduced-motion:reduce){
  #mq,#burst svg,#match.ready svg,.steam path{animation:none!important}
  #s4.show img{animation-duration:.01s!important}
@@ -348,6 +383,7 @@ button:focus-visible,a:focus-visible{outline:2px solid #ffd21f;outline-offset:3p
 <div id="flash"></div>
 <div id="s2hint"><span id="s2hinttxt">Hover over the matchstick</span></div>
 </div>
+<button id="skip" type="button">Skip to work <span aria-hidden="true">&rarr;</span></button>
 <button id="replay" type="button" aria-label="Replay from the start" title="Replay from the start"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1"/><path d="M3.5 4v4.5H8"/></svg></button>
 <div id="s3">
 <div class="s3h"><span class="rt"><button id="next3" type="button">Meet me &rarr;</button></span></div>
@@ -360,13 +396,16 @@ button:focus-visible,a:focus-visible{outline:2px solid #ffd21f;outline-offset:3p
 <figure class="vmc"><div class="vw"><video src="assets/motion-meri-jaan.mp4" muted loop playsinline preload="metadata"></video><button class="pl" type="button" aria-label="Play Meri Jaan animation"></button></div><figcaption>02 &middot; Meri Jaan</figcaption></figure>
 <figure class="vmc"><div class="vw"><video src="assets/motion-crab.mp4" muted loop playsinline preload="metadata"></video><button class="pl" type="button" aria-label="Play crab animation"></button></div><figcaption>03 &middot; Crab</figcaption></figure>
 </div></div>
-<div id="s4" class="pg" aria-label="Introduction"><div class="m4"><img class="m4t" src="assets/intro-text-mobile.webp" alt="I notice things people miss and explain things people skip."><img class="m4c" src="assets/intro-portrait-mobile.webp" alt="Portrait"></div><img class="full4" src="assets/intro-desktop.webp" alt="I notice things people miss and explain things people skip. Swati Kashyap"><div class="hint2" id="h4"><span id="h4t">Hover to continue</span></div></div>
+<div id="s4" class="pg" aria-label="Introduction"><div class="intro">
+<div class="itx"><h2 class="ih">I notice things people <em>miss</em> and explain things people <em>skip</em>.<span class="dot" aria-hidden="true"></span></h2>
+<p class="ip">Design for me is, the practice of noticing. I find value in the details people miss and create visual narratives that make those insights accessible to others.</p></div>
+<img class="ipt" src="assets/intro-portrait-mobile.webp" alt="Swati, chin in hand, on a torn paper note beside a glass of chai"></div><div class="hint2" id="h4"><span id="h4t">Hover to continue</span></div></div>
 <div id="s5" class="pg" aria-label="A mosquito"><svg id="mq" viewBox="0 0 874 1916" role="img" aria-label="A mosquito. Click it."><defs><clipPath id="ce1"><path d="M743.0,449.0L734.0,448.6L703.1,433.0L691.0,424.2L677.7,411.0L669.3,398.0L660.2,375.0L653.6,349.0L652.4,336.0L645.9,314.0L644.0,301.0L644.9,286.0L643.0,260.0L644.1,200.0L652.4,165.0L663.3,139.0L675.1,124.0L696.0,108.9L710.0,104.2L724.0,103.2L739.0,104.3L758.0,109.1L769.0,114.3L782.0,123.1L793.2,134.0L805.9,153.0L813.4,170.0L824.2,210.0L825.1,224.0L829.8,237.0L829.1,259.0L831.7,275.0L832.2,301.0L831.3,340.0L822.8,380.0L816.7,391.0L813.7,400.0L798.4,419.0L786.0,431.0L775.0,439.0L743.0,449.0Z"/></clipPath><clipPath id="ce2"><path d="M552.0,455.2L528.0,455.1L502.0,450.3L491.0,445.4L479.0,437.0L461.0,420.1L449.4,413.0L444.4,407.0L436.8,394.0L428.8,376.0L423.6,357.0L420.3,330.0L420.3,296.0L418.0,253.0L422.9,223.0L425.4,187.0L428.5,174.0L431.9,163.0L440.2,147.0L451.0,132.7L472.0,120.0L496.0,109.9L511.0,109.0L543.0,114.9L574.0,132.6L583.8,144.0L602.9,192.0L608.4,212.0L616.2,271.0L618.5,329.0L615.3,361.0L607.1,408.0L599.0,424.2L589.0,436.8L561.0,452.0L552.0,455.2Z"/></clipPath></defs>
 <path d="M405.4,1896.0L412.0,1892.0L414.0,1884.0L410.4,1871.0L400.0,1853.0L385.0,1839.4L367.0,1832.4L352.0,1830.9L349.3,1829.0L348.2,1826.0L346.1,1762.0L339.0,1706.0L339.0,1677.0L336.8,1661.0L335.4,1632.0L335.1,1555.0L331.9,1502.0L333.4,1485.0L328.6,1446.0L329.0,1441.1L330.9,1437.0L334.0,1435.9L360.0,1443.1L376.0,1444.9L406.0,1445.3L410.8,1449.0L414.9,1476.0L416.8,1531.0L422.4,1588.0L422.3,1600.0L431.1,1666.0L435.2,1722.0L440.1,1764.0L441.4,1800.0L446.0,1805.4L453.2,1810.0L459.0,1810.6L471.0,1808.5L481.3,1812.0L487.7,1817.0L493.3,1824.0L499.0,1840.0L505.2,1848.0L511.0,1851.7L518.0,1851.0L525.6,1844.0L526.9,1838.0L522.2,1823.0L514.0,1809.1L495.0,1791.1L485.0,1785.9L469.0,1780.9L464.4,1776.0L454.7,1712.0L451.6,1666.0L444.7,1611.0L440.8,1565.0L434.7,1470.0L431.6,1447.0L434.0,1442.9L441.0,1440.9L458.0,1432.4L489.7,1403.0L501.4,1385.0L505.2,1376.0L509.6,1360.0L511.0,1349.0L506.8,1319.0L502.1,1306.0L490.4,1282.0L473.1,1253.0L457.2,1231.0L456.2,1227.0L460.0,1223.9L474.0,1222.3L503.0,1213.4L513.0,1213.4L521.0,1207.0L538.0,1201.5L545.0,1196.4L556.0,1185.0L569.0,1175.4L580.1,1164.0L586.8,1154.0L592.6,1139.0L595.2,1125.0L606.3,1092.0L606.4,1051.0L602.6,1031.0L584.0,973.0L567.3,901.0L552.4,859.0L540.3,815.0L528.9,770.0L527.6,760.0L519.5,734.0L518.4,725.0L520.0,722.4L524.0,723.0L533.9,731.0L545.3,742.0L553.0,752.3L567.0,788.0L591.2,882.0L592.7,904.0L595.2,913.0L595.2,923.0L597.1,931.0L602.0,939.0L608.0,941.8L618.0,939.0L620.4,936.0L621.7,931.0L614.6,877.0L607.7,843.0L587.4,772.0L573.7,738.0L552.7,710.0L545.0,702.7L516.5,684.0L517.4,667.0L515.0,646.0L516.2,635.0L518.0,631.5L523.0,631.0L541.0,639.5L547.0,643.9L570.6,670.0L587.0,696.6L602.6,731.0L603.8,740.0L614.0,772.0L625.3,824.0L635.0,832.5L640.0,833.9L644.0,833.4L651.0,827.2L653.0,815.0L643.2,774.0L634.4,748.0L601.0,665.7L573.0,627.5L560.0,615.5L541.0,604.6L528.0,594.0L526.6,590.0L527.4,582.0L531.8,568.0L538.0,555.5L541.0,541.4L554.8,516.0L560.0,508.8L563.0,507.2L566.0,509.0L571.0,516.6L581.1,527.0L606.0,549.0L621.0,557.3L630.0,560.3L636.7,571.0L646.0,580.0L649.1,616.0L655.1,642.0L656.3,661.0L666.1,723.0L667.4,742.0L676.7,795.0L679.9,804.0L679.7,811.0L684.2,840.0L685.1,857.0L692.3,895.0L697.3,912.0L702.3,947.0L705.2,955.0L707.1,975.0L716.7,1035.0L722.5,1054.0L727.4,1085.0L731.3,1099.0L735.2,1122.0L738.7,1133.0L742.3,1160.0L746.0,1164.6L751.0,1164.5L754.5,1161.0L755.1,1154.0L751.2,1131.0L743.0,1097.0L742.7,1081.0L739.2,1064.0L738.0,1045.0L730.1,999.0L724.0,973.0L724.4,963.0L722.5,948.0L712.7,900.0L709.9,863.0L707.1,851.0L706.6,838.0L699.3,784.0L688.5,733.0L676.7,664.0L677.0,650.0L672.5,600.0L671.3,553.0L675.2,543.0L694.0,513.3L714.0,468.7L718.0,467.9L736.0,474.6L748.0,475.3L770.0,472.5L794.0,457.0L816.5,437.0L823.0,424.6L838.1,405.0L846.5,380.0L852.2,352.0L854.6,324.0L854.4,289.0L850.4,229.0L834.8,164.0L826.2,140.0L818.0,126.5L801.0,103.5L791.0,95.6L772.0,84.4L745.0,77.5L710.0,79.0L689.0,56.2L679.9,43.0L672.0,35.7L664.0,30.8L641.0,23.0L627.0,20.3L615.0,19.6L605.0,21.2L592.0,24.7L581.1,30.0L571.1,32.0L553.0,49.5L539.8,60.0L526.0,81.7L492.0,87.1L479.0,90.3L467.0,96.0L448.9,107.0L433.7,120.0L417.0,142.6L407.4,164.0L403.8,178.0L399.2,228.0L395.2,253.0L397.3,277.0L397.8,329.0L401.5,360.0L405.3,376.0L414.5,400.0L419.6,409.0L419.5,414.0L411.0,422.4L399.0,428.1L381.9,440.0L339.0,481.4L312.0,503.6L269.3,551.0L217.0,601.7L172.3,663.0L156.8,686.0L138.2,725.0L105.0,779.1L72.2,843.0L59.3,875.0L46.4,917.0L40.0,933.0L31.0,964.0L25.3,993.0L20.6,1050.0L19.9,1081.0L21.3,1097.0L29.2,1131.0L49.0,1171.9L57.0,1182.0L75.0,1196.9L91.7,1206.0L107.0,1210.7L125.0,1214.2L133.0,1217.9L165.0,1227.0L182.0,1229.7L199.0,1227.4L202.0,1228.3L206.6,1240.0L210.8,1268.0L215.8,1286.0L240.1,1341.0L247.3,1352.0L256.8,1372.0L272.0,1395.3L293.0,1416.2L305.0,1424.6L308.9,1430.0L309.9,1446.0L307.6,1457.0L310.9,1476.0L309.4,1505.0L311.0,1514.0L309.5,1538.0L313.8,1576.0L315.0,1599.0L314.1,1628.0L319.0,1688.0L320.4,1726.0L326.4,1785.0L327.9,1831.0L326.7,1853.0L331.0,1860.2L340.0,1865.9L344.0,1865.6L352.0,1859.7L358.0,1858.1L369.0,1859.6L377.0,1863.2L382.1,1868.0L392.1,1888.0L400.0,1895.1L405.4,1896.0Z M743.0,449.0L734.0,448.6L703.1,433.0L691.0,424.2L677.7,411.0L669.3,398.0L660.2,375.0L653.6,349.0L652.4,336.0L645.9,314.0L644.0,301.0L644.9,286.0L643.0,260.0L644.1,200.0L652.4,165.0L663.3,139.0L675.1,124.0L696.0,108.9L710.0,104.2L724.0,103.2L739.0,104.3L758.0,109.1L769.0,114.3L782.0,123.1L793.2,134.0L805.9,153.0L813.4,170.0L824.2,210.0L825.1,224.0L829.8,237.0L829.1,259.0L831.7,275.0L832.2,301.0L831.3,340.0L822.8,380.0L816.7,391.0L813.7,400.0L798.4,419.0L786.0,431.0L775.0,439.0L743.0,449.0Z M552.0,455.2L528.0,455.1L502.0,450.3L491.0,445.4L479.0,437.0L461.0,420.1L449.4,413.0L444.4,407.0L436.8,394.0L428.8,376.0L423.6,357.0L420.3,330.0L420.3,296.0L418.0,253.0L422.9,223.0L425.4,187.0L428.5,174.0L431.9,163.0L440.2,147.0L451.0,132.7L472.0,120.0L496.0,109.9L511.0,109.0L543.0,114.9L574.0,132.6L583.8,144.0L602.9,192.0L608.4,212.0L616.2,271.0L618.5,329.0L615.3,361.0L607.1,408.0L599.0,424.2L589.0,436.8L561.0,452.0L552.0,455.2Z M184.0,1204.0L163.0,1201.8L155.0,1198.9L142.9,1197.0L129.0,1190.9L94.0,1182.6L73.4,1169.0L66.0,1160.0L48.9,1125.0L44.2,1108.0L41.5,1085.0L40.8,1050.0L46.0,1004.0L46.0,987.0L51.2,963.0L62.5,935.0L72.0,903.0L91.9,849.0L128.8,779.0L146.6,752.0L173.0,701.0L188.8,674.0L228.2,620.0L248.6,597.0L275.2,573.0L298.0,547.8L312.0,538.2L332.0,518.3L355.9,501.0L368.0,489.8L378.0,485.1L380.4,487.0L380.4,492.0L372.7,516.0L355.8,587.0L337.1,686.0L329.5,712.0L316.7,770.0L311.9,809.0L307.9,828.0L303.3,875.0L293.8,934.0L288.9,955.0L283.5,1011.0L279.9,1034.0L279.7,1050.0L276.3,1067.0L276.3,1090.0L274.3,1113.0L267.8,1163.0L258.4,1178.0L240.0,1193.6L184.0,1204.0Z M436.0,1202.0L417.0,1201.8L411.0,1200.4L375.0,1183.3L364.0,1175.2L349.0,1155.3L341.7,1142.0L327.7,1109.0L323.8,1091.0L313.0,1064.0L316.5,1042.0L317.4,1023.0L319.8,1013.0L320.5,999.0L323.6,986.0L322.9,965.0L325.0,954.0L324.3,945.0L326.4,936.0L326.5,921.0L333.6,870.0L333.4,860.0L336.3,849.0L336.7,838.0L341.0,814.0L350.7,769.0L355.1,757.0L359.1,734.0L374.0,677.0L378.5,646.0L383.6,625.0L395.1,587.0L401.0,558.1L406.6,544.0L412.8,517.0L417.2,502.0L420.0,499.8L423.3,504.0L432.2,543.0L459.4,622.0L463.3,642.0L470.5,654.0L479.6,680.0L490.5,701.0L496.6,729.0L502.4,746.0L503.7,760.0L507.0,767.0L510.5,784.0L514.2,793.0L515.7,807.0L520.5,818.0L523.6,838.0L529.4,851.0L531.3,870.0L542.5,891.0L546.4,903.0L548.5,923.0L557.4,946.0L557.0,953.0L560.8,963.0L561.7,975.0L568.9,994.0L571.1,1011.0L575.4,1020.0L583.2,1048.0L583.7,1064.0L585.8,1072.0L581.0,1087.0L580.2,1101.0L572.6,1115.0L572.0,1130.0L563.4,1145.0L538.0,1168.1L519.0,1181.6L507.0,1187.4L493.0,1188.6L464.0,1197.7L436.0,1202.0Z" fill="#000" fill-rule="evenodd"/><path d="M735.5,305.0L742.3,300.0L743.3,292.0L739.5,283.0L736.0,281.4L731.0,281.4L724.0,286.0L721.5,296.0L723.7,301.0L726.9,304.0L732.0,305.6L735.5,305.0Z M515.3,307.0L519.5,303.0L520.5,297.0L517.0,288.0L514.0,285.5L511.0,285.1L505.1,290.0L502.7,298.0L507.0,304.9L512.0,307.3L515.3,307.0Z" fill="#000"/>
 <g clip-path="url(#ce1)"><rect class="lid" x="637.0" y="97.2" width="201.2" height="357.8" fill="#000"/></g>
 <g clip-path="url(#ce2)"><rect class="lid" x="412.0" y="103.0" width="212.5" height="358.2" fill="#000"/></g></svg>
 <div class="hint2" id="h5"><span id="h5t">Click the mosquito</span></div>
-<div id="load"><h2>Loading<i>&hellip;</i></h2><p>other works are left</p></div></div>
+<div id="load"><h2>Loading<i>&hellip;</i></h2><p>more work this way</p></div></div>
 <div id="s6" class="pg" aria-label="Photography works">
 <div class="w6h"><span>Swati Kashyap</span><span>Works</span></div>
 <div id="wk">
@@ -383,7 +422,8 @@ button:focus-visible,a:focus-visible{outline:2px solid #ffd21f;outline-offset:3p
 <div class="soc">
 <a href="https://www.linkedin.com/in/swati-kashyap-377854261/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z"/></svg></a>
 <a href="https://www.behance.net/swatikashyap1" target="_blank" rel="noopener noreferrer" aria-label="Behance"><svg viewBox="0 0 24 24"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988H0V5.021h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zM3 11h3.584c2.508 0 2.906-3-.312-3H3v3zm3.391 3H3v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/></svg></a>
-</div></div></div>
+</div>
+<div class="back"><button id="back3" type="button">&larr; Projects</button><button id="back6" type="button">&larr; Photography</button></div></div></div>
 <div id="pb" role="dialog" aria-modal="true" aria-label="Sanskriti photobook"><button id="pbx" type="button" aria-label="Close">&times;</button><button class="nv" id="pbp" type="button" aria-label="Previous page">&lsaquo;</button><img id="pbi" alt="Photobook page"><button class="nv" id="pbn" type="button" aria-label="Next page">&rsaquo;</button><div id="pbc"></div></div>
 
 <script>
@@ -432,7 +472,7 @@ if(pouring){var r=tilt*Math.PI/180,sx=kx+Math.cos(r)*TIPX-Math.sin(r)*TIPY,sy=ky
 else{stream.setAttribute('d','');st2.setAttribute('d','');rip.setAttribute('opacity',0)}
 pud.setAttribute('rx',cl((ov-.55)/.45)*102);pud.setAttribute('ry',cl((ov-.55)/.45)*9);
 steam.setAttribute('opacity',Math.min(1,fill*1.5));
-if(ov>=1&&!done){done=true;setTimeout(function(){s2.classList.add('show');if(window.S2)S2.enter()},1100)}
+if(ov>=1&&!done){done=true;setTimeout(function(){if(document.body.classList.contains('atwork'))return;s2.classList.add('show');if(window.S2)S2.enter()},1100)}
 requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 $('replay').onclick=function(){if(window.S2)S2.reset();s2.classList.remove('show');fill=0;ov=0;px=kx=X0;py=ky=Y0;tilt=0;done=false;hint.style.opacity=.9};
@@ -559,7 +599,7 @@ function start(){
  go=true;T0=performance.now();build();M.style.pointerEvents='none';M.classList.remove('ready');hint.style.opacity=0}
 
 function toSlide3(){
- leaving=true;var h=headC();
+ leaving=true;var h=headC();document.body.classList.add('atwork');
  burst.animate([{transform:'scale(1)'},{transform:'scale(10)'}],{duration:900,easing:'cubic-bezier(.6,0,.9,.4)',fill:'forwards'});
  later(function(){
   s3.style.transition='none';s3.style.visibility='visible';s3.style.clipPath='circle(0px at '+h.x+'px '+h.y+'px)';
@@ -577,7 +617,7 @@ function reset(){
  burst.getAnimations().forEach(function(a){a.cancel()});burst.style.opacity=0;
  sparks.innerHTML='';strip.classList.remove('hot');hint.style.opacity=1;
  s3.style.transition='none';s3.style.visibility='hidden';s3.style.clipPath='circle(0px at 50% 50%)';s3.classList.remove('in','done');vm.classList.remove('open');vids().forEach(function(v){v.pause()});if(window.S45)S45.reset();
- document.body.classList.remove('deep')}
+ document.body.classList.remove('deep','atwork')}
 
 function enter(){
  reset();calc();on=true;document.body.classList.add('deep');
@@ -591,7 +631,15 @@ M.addEventListener('pointermove',start);
 M.addEventListener('pointerdown',start);
 M.addEventListener('click',start);
 addEventListener('resize',function(){if(on)calc()});
-window.S2={enter:enter,reset:reset,projects:projects};
+/* skip straight to the work grid */
+function skip(){
+ reset();document.body.classList.add('deep','atwork');
+ s3.style.transition='none';s3.style.visibility='visible';s3.style.clipPath='circle(0px at 50% 50%)';
+ void s3.offsetWidth;s3.style.transition='';s3.style.clipPath='circle(160vmax at 50% 50%)';
+ later(function(){s3.classList.add('in')},300);
+ later(function(){s3.classList.add('done')},300+6*110+900)}
+$('skip').addEventListener('click',skip);
+window.S2={enter:enter,reset:reset,skip:skip,projects:projects};
 })();
 
 /* ===== Slides 4-7 : intro -> mosquito -> photography works -> contact ===== */
@@ -616,15 +664,20 @@ var lids=pages[1].querySelectorAll('.lid');
 function blink(){lids.forEach(function(l){l.animate([{transform:'scaleY(0)'},{transform:'scaleY(1)',offset:.42},{transform:'scaleY(1)',offset:.6},{transform:'scaleY(0)'}],{duration:300,easing:'ease-in-out'})})}
 function startBlink(){if(started||!ready5||!pages[1].classList.contains('show'))return;started=true;
  pages[1].classList.add('go');
- [200,1100,1450,2500,3400,3750,4700,5200].forEach(function(t){later(blink,t)});
- later(function(){(new Image()).src=PB[0]},2000);
- later(function(){go(2)},6300)}
-pages[1].addEventListener('click',startBlink);
+ [150,650,900,1600,2100,2350].forEach(function(t){later(blink,t)});
+ later(function(){(new Image()).src=PB[0]},800);
+ later(function(){go(2)},3200)}
+/* a second tap while it's "loading" goes straight on */
+function hurry(){if(!started||pages[2].classList.contains('show'))return;timers.forEach(clearTimeout);timers=[];go(2)}
+pages[1].addEventListener('click',function(){started?hurry():startBlink()});
 /* keyboard: Enter or Space moves past the intro and the mosquito */
 addEventListener('keydown',function(e){if(e.key!=='Enter'&&e.key!==' ')return;if(e.target.closest&&e.target.closest('button,a'))return;
  if(pages[0].classList.contains('show')&&!pages[1].classList.contains('show')){e.preventDefault();trig4()}
- else if(pages[1].classList.contains('show')&&!pages[2].classList.contains('show')){e.preventDefault();startBlink()}});
+ else if(pages[1].classList.contains('show')&&!pages[2].classList.contains('show')){e.preventDefault();started?hurry():startBlink()}});
 $('to7').addEventListener('click',function(){go(3)});
+/* contact -> back to the project grid (slide 3 sits underneath) or to photography */
+$('back3').addEventListener('click',function(){pages.forEach(function(p){p.classList.remove('show','go')});started=false;ready5=false;$('h4').style.opacity=1});
+$('back6').addEventListener('click',function(){pages[2].classList.add('show');later(function(){pages[3].classList.remove('show')},50)});
 /* photobook viewer */
 var pb=$('pb'),pbi=$('pbi'),pbc=$('pbc'),cur=0;
 function showP(i){cur=(i+PB.length)%PB.length;pbi.src=PB[cur];pbc.textContent=(cur+1)+' / '+PB.length;(new Image()).src=PB[(cur+1)%PB.length]}
